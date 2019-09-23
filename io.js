@@ -1,4 +1,5 @@
-var io = require('socket.io')()
+var io = require('socket.io')();
+var players = {}
 
  // Listen for new connections from clients (socket)
 io.on('connection', function(socket) {
@@ -8,6 +9,14 @@ io.on('connection', function(socket) {
     });
     socket.on('clear-circles', function(){
         io.emit('clear-circles');
+    });
+    socket.on('register-player', function(initials){
+        players[socket.id] = initials;
+        io.emit('update-player-list', Object.values(players));
+    });
+    socket.on('disconnect', function(){
+        delete player[socket.id];
+        io.emit('update-player-list', Object.values(players));
     });
 });
   
