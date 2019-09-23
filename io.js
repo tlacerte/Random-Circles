@@ -6,6 +6,9 @@ io.on('connection', function(socket) {
     socket.on('add-circle', function(data){
         io.emit('add-circle', data);
     });
+    socket.on('clear-circles', function(){
+        io.emit('clear-circles');
+    });
 });
   
   // io represents socket.io on the server - let's export it

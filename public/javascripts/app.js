@@ -8,6 +8,9 @@ var socket = io();
 socket.on('add-circle', function (data) {
   addCircle(data);
 });
+socket.on('clear-circles', function() {
+  circles.innerHTML = '';
+});
 
 circles.addEventListener('click', function(evt) {
   socket.emit('add-circle', {
@@ -20,7 +23,7 @@ circles.addEventListener('click', function(evt) {
 });
 
 document.querySelector('button').addEventListener('click', function() {
-  circles.innerHTML = '';
+  socket.emit('clear-circles');
 });
 
 do {
